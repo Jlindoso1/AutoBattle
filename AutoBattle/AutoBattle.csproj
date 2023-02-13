@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Character.cs" />
-    <Compile Include="Grid.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Code\Character.cs" />
+    <Compile Include="Code\Grid.cs" />
+    <Compile Include="Code\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Types.cs" />
+    <Compile Include="Code\Types.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
