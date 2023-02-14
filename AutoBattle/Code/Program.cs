@@ -173,9 +173,12 @@ namespace AutoBattle
                 if(playerCharacter.Health <= 0)
                 {
                     Console.WriteLine($"Player {playerCharacter.PlayerIndex} is dead\n");
-                }else
+                    Console.WriteLine($"Player {enemyCharacter.PlayerIndex} wins!\n");
+                }
+                else
                 {
                     Console.WriteLine($"Player {enemyCharacter.PlayerIndex} is dead\n");
+                    Console.WriteLine($"Player {playerCharacter.PlayerIndex} wins!\n");
                 }
 
                 Console.Write(Environment.NewLine + Environment.NewLine);
@@ -194,9 +197,36 @@ namespace AutoBattle
             }
         }
 
+        static void SetupGrid()
+        {
+            Console.WriteLine("[Setup the grid size]\n");
+            Console.WriteLine("Setup grid lines:");
+            string type = Console.ReadLine();
+            uint lines;
+            bool result = UInt32.TryParse(type, out lines);
+            if(!result)
+            {
+                Console.WriteLine("Invalid number");
+                SetupGrid();
+                return;
+            }
+            Console.WriteLine("Setup grid columns:");
+            type = Console.ReadLine();
+            uint columns;
+            result = UInt32.TryParse(type, out columns);
+            if (!result)
+            {
+                Console.WriteLine("Invalid number");
+                SetupGrid();
+                return;
+            }
+            grid = new Grid((int)lines, (int)columns);
+        }
+
         static void Main(string[] args)
         {
-            grid = new Grid(6, 10);
+            SetupGrid();
+            
             allPlayers = new List<Character>();
             currentTurn = 0;
             numberOfPossibleTiles = grid.grids.Count;
