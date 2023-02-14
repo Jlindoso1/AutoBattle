@@ -38,6 +38,8 @@ namespace AutoBattle
 
         public void StartTurn(Grid battlefield)
         {
+            if (Health <= 0)
+                return;
 
             if (CheckCloseTargets(battlefield)) 
             {
@@ -112,10 +114,11 @@ namespace AutoBattle
 
         public void Attack (Character target)
         {
-            var rand = new Random();
+            var rand = new Random(DateTime.Now.Millisecond);
             int damage = (rand.Next(0, (int)BaseDamage));
             target.TakeDamage(damage);
             Console.WriteLine($"Player {PlayerIndex} is attacking the player {Target.PlayerIndex} and did {damage} damage\n");
+            Console.WriteLine($"Player {target.PlayerIndex} has {Target.Health} of health\n");
         }
     }
 }

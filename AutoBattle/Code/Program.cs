@@ -94,9 +94,18 @@ namespace AutoBattle
             AlocatePlayerCharacter();
         }
 
+        static int RandomInt(int min, int maxExclusive, int seed)
+        {
+            Random rand = new Random(seed);
+            int result = rand.Next(min, maxExclusive);
+            return result;
+        }
+
         static void AlocatePlayerCharacter()
         {
-            int random = 0;
+            int min = 0;
+            int max = grid.xLength;
+            int random = RandomInt(min, max, System.DateTime.Now.Millisecond);
             GridBox RandomLocation = (grid.grids.ElementAt(random));
             Console.Write($"{random}\n");
             if (!RandomLocation.ocupied)
@@ -114,7 +123,9 @@ namespace AutoBattle
 
         static void AlocateEnemyCharacter()
         {
-            int random = 24;
+            int min = (grid.yLength - 1) * grid.xLength;
+            int max = grid.yLength * grid.xLength;
+            int random = RandomInt(min, max, System.DateTime.Now.Millisecond);
             GridBox RandomLocation = (grid.grids.ElementAt(random));
             Console.Write($"{random}\n");
             if (!RandomLocation.ocupied)
@@ -137,7 +148,13 @@ namespace AutoBattle
 
             if (currentTurn == 0)
             {
-                //AllPlayers.Sort();  
+                int rand = RandomInt(0, 2, DateTime.Now.Millisecond);
+                if(rand > 0)
+                {
+                    Character temp = allPlayers[0];
+                    allPlayers[0] = allPlayers[1];
+                    allPlayers[1] = temp;
+                }
             }
 
             foreach (Character character in allPlayers)
@@ -177,16 +194,9 @@ namespace AutoBattle
             }
         }
 
-        int GetRandomInt(int min, int max)
-        {
-            var rand = new Random();
-            int index = rand.Next(min, max);
-            return index;
-        }
-
         static void Main(string[] args)
         {
-            grid = new Grid(5, 5);
+            grid = new Grid(6, 10);
             allPlayers = new List<Character>();
             currentTurn = 0;
             numberOfPossibleTiles = grid.grids.Count;
