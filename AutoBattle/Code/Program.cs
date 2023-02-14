@@ -165,17 +165,26 @@ namespace AutoBattle
             HandleTurn();
         }
 
+        static void DrawEndBattlefield(Character dead)
+        {
+            dead.currentBox.ocupied = false;
+            grid.grids[dead.currentBox.Index] = dead.currentBox;
+            grid.drawBattlefield();
+        }
+
         static void HandleTurn()
         {
             if (playerCharacter.Health <= 0 || enemyCharacter.Health <= 0)
             {
                 if(playerCharacter.Health <= 0)
                 {
+                    DrawEndBattlefield(playerCharacter);
                     Console.WriteLine($"Player {playerCharacter.PlayerIndex} is dead\n");
                     Console.WriteLine($"Player {enemyCharacter.PlayerIndex} wins!\n");
                 }
                 else
                 {
+                    DrawEndBattlefield(enemyCharacter);
                     Console.WriteLine($"Player {enemyCharacter.PlayerIndex} is dead\n");
                     Console.WriteLine($"Player {playerCharacter.PlayerIndex} wins!\n");
                 }
