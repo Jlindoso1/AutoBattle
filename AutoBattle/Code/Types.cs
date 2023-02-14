@@ -11,8 +11,9 @@ namespace AutoBattle
         public const float DamageMult = 1;
         public const float WarriorDamageMult = 2;
         public const int Range = 1;
-        public const int ArcherRange = 5;
+        public const int ArcherRange = 4;
         public const float KnockBackTilesAmount = 1;
+        public const double AbilityChance = 0.5;
     }
     public struct GridBox
     {

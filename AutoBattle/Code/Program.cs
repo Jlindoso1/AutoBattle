@@ -178,15 +178,15 @@ namespace AutoBattle
             {
                 if(playerCharacter.Health <= 0)
                 {
-                    DrawEndBattlefield(playerCharacter);
                     Console.WriteLine($"Player {playerCharacter.PlayerIndex} is dead\n");
                     Console.WriteLine($"Player {enemyCharacter.PlayerIndex} wins!\n");
+                    DrawEndBattlefield(playerCharacter);
                 }
                 else
                 {
-                    DrawEndBattlefield(enemyCharacter);
                     Console.WriteLine($"Player {enemyCharacter.PlayerIndex} is dead\n");
                     Console.WriteLine($"Player {playerCharacter.PlayerIndex} wins!\n");
+                    DrawEndBattlefield(enemyCharacter);
                 }
 
                 Console.Write(Environment.NewLine + Environment.NewLine);

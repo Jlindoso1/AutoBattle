@@ -122,13 +122,35 @@ namespace AutoBattle
             }
         }
 
-        private void Teleport()
+        private void Teleport(Grid battlefield)
         {
-            Console.WriteLine("Teleport Test");
+            Random random = new Random(DateTime.Now.Millisecond);
+            int xRand = 0;
+            int yRand = 0;
+            GridBox box = new GridBox();
+            do
+            {
+                xRand = random.Next(0, battlefield.xLength);
+                yRand = random.Next(0, battlefield.yLength);
+                box = battlefield.grids[yRand * battlefield.xLength + xRand];
+            }
+            while (box.ocupied);
+            owner.currentBox.ocupied = false;
+            battlefield.grids[owner.currentBox.Index] = owner.currentBox;
+            box.ocupied = true;
+            owner.currentBox = box;
+            battlefield.grids[owner.currentBox.Index] = owner.currentBox;
+            Console.WriteLine("Player " + owner.PlayerIndex + " teleported to " + "tile " + box.xIndex + " " + box.yIndex + "\n");
+            battlefield.drawBattlefield();
         }
 
         public void AbilityTurn(Grid battlefield)
         {
+            Random random = new Random(DateTime.Now.Millisecond);
+            double number = random.NextDouble();
+            if (number < Constants.AbilityChance)
+                return;
+
             switch(characterClass)
             {
                 case CharacterClass.Warrior:
@@ -143,7 +165,7 @@ namespace AutoBattle
                     }
                     break;
                 case CharacterClass.Cleric:
-                    Teleport();
+                    Teleport(battlefield);
                     break;
             }
         }
