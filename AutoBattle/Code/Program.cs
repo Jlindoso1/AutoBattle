@@ -3,7 +3,6 @@ using static AutoBattle.Character;
 using static AutoBattle.Grid;
 using System.Collections.Generic;
 using System.Linq;
-using static AutoBattle.Types;
 
 namespace AutoBattle
 {
@@ -56,8 +55,8 @@ namespace AutoBattle
             CharacterClass characterClass = (CharacterClass)classIndex;
             Console.WriteLine($"Player Class Choice: {characterClass}");
             playerCharacter = new Character(characterClass);
-            playerCharacter.Health = 100;
-            playerCharacter.BaseDamage = 20;
+            playerCharacter.Health = Constants.Health;
+            playerCharacter.BaseDamage = Constants.BaseDamage;
             playerCharacter.PlayerIndex = 0;
 
             CreateEnemyCharacter();
@@ -71,8 +70,8 @@ namespace AutoBattle
             CharacterClass enemyClass = (CharacterClass)randomInteger;
             Console.WriteLine($"Enemy Class Choice: {enemyClass}");
             enemyCharacter = new Character(enemyClass);
-            enemyCharacter.Health = 100;
-            enemyCharacter.BaseDamage = 20;
+            enemyCharacter.Health = Constants.Health;
+            enemyCharacter.BaseDamage = Constants.BaseDamage;
             enemyCharacter.PlayerIndex = 1;
             StartGame();
         }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using static AutoBattle.Types;
 
 namespace AutoBattle
 {
@@ -14,10 +13,12 @@ namespace AutoBattle
         public float DamageMultiplier { get; set; }
         public GridBox currentBox;
         public int PlayerIndex;
-        public Character Target { get; set; } 
+        public Character Target { get; set; }
+
+        private CharacterAbility ability;
         public Character(CharacterClass characterClass)
         {
-
+            ability = new CharacterAbility(characterClass, this);
         }
 
 
@@ -40,6 +41,8 @@ namespace AutoBattle
         {
             if (Health <= 0)
                 return;
+
+            ability.AbilityTurn(battlefield);
 
             if (CheckCloseTargets(battlefield)) 
             {
@@ -98,7 +101,7 @@ namespace AutoBattle
         }
 
         // Check in x and y directions if there is any character close enough to be a target.
-        bool CheckCloseTargets(Grid battlefield)
+        public bool CheckCloseTargets(Grid battlefield)
         {
             bool left = (battlefield.grids.Find(x => x.xIndex == currentBox.xIndex - 1 && x.yIndex == currentBox.yIndex).ocupied);
             bool right = (battlefield.grids.Find(x => x.xIndex == currentBox.xIndex + 1 && x.yIndex == currentBox.yIndex).ocupied);

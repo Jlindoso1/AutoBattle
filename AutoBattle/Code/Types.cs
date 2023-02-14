@@ -4,49 +4,38 @@ using System.Text;
 
 namespace AutoBattle
 {
-    public class Types
+    public class Constants
     {
+        public const float Health = 100;
+        public const float BaseDamage = 20;
+        public const float DamageMult = 1;
+        public const float WarriorDamageMult = 2;
+        public const int Range = 1;
+        public const int ArcherRange = 5;
+        public const float KnockBackTilesAmount = 1;
+    }
+    public struct GridBox
+    {
+        public int xIndex;
+        public int yIndex;
+        public bool ocupied;
+        public int Index;
 
-        public struct CharacterClassSpecific
+        public GridBox(int x, int y, bool ocupied, int index)
         {
-            CharacterClass CharacterClass;
-            float hpModifier;
-            float ClassDamage;
-            CharacterSkills[] skills;
-
+            xIndex = x;
+            yIndex = y;
+            this.ocupied = ocupied;
+            this.Index = index;
         }
 
-        public struct GridBox
-        {
-            public int xIndex;
-            public int yIndex;
-            public bool ocupied;
-            public int Index;
+    }
 
-            public GridBox(int x, int y, bool ocupied, int index)
-            {
-                xIndex = x;
-                yIndex = y;
-                this.ocupied = ocupied;
-                this.Index = index;
-            }
-
-        }
-
-        public struct CharacterSkills
-        {
-            string Name;
-            float damage;
-            float damageMultiplier;
-        }
-
-        public enum CharacterClass : uint
-        {
-            Paladin = 1,
-            Warrior = 2,
-            Cleric = 3,
-            Archer = 4
-        }
-
+    public enum CharacterClass : uint
+    {
+        Paladin = 1,
+        Warrior = 2,
+        Cleric = 3,
+        Archer = 4
     }
 }
